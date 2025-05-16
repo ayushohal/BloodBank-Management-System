@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Donors</title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #dc3545;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: #343a40;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #6c757d;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        th {
+            background-color: #dc3545;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+            }
+
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <span class="logo-icon">❤️</span>
+                <span class="logo-text">Blood Bank Management</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="http://127.0.0.1:5000/">Home</a></li>
+                <li><a href="/bloodbank/add_donor">Add Donor</a></li>
+                <li><a href="/bloodbank/inventory">Inventory</a></li>
+                <li><a href="/bloodbank/donations">Donations</a></li>
+                <li><a href="/bloodbank/request_blood">Request Blood</a></li>
+                <li><a href="/bloodbank/view_requests">Blood Requests</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-container">
+        <div class="page-header">
+            <h1>Donor List</h1>
+        </div>
+    
+    {% if donors %}
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                    <th>Blood Group</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donor in donors %}
+                <tr>
+                    <td>{{ donor.id }}</td>
+                    <td>{{ donor.name }}</td>
+                    <td>{{ donor.age }}</td>
+                    <td>{{ donor.email }}</td>
+                    <td>{{ donor.blood_group }}</td>
+                    <td>{{ donor.contact }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No donors found.</p>
+    {% endif %}
+    <br>
+    <a href="/bloodbank/add_donor">Add New Donor</a>
+    </main>
+    <script src="/static/chatbot.js"></script>
+</body>
+</html>

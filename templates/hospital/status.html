@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Request Status</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #dc3545;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: #343a40;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #6c757d;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        th {
+            background-color: #dc3545;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+            }
+
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <span class="logo-icon">❤️</span>
+                <span class="logo-text">Blood Bank Management</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="http://127.0.0.1:5000/">Home</a></li>
+                <li><a href="/hospital/request_blood">Request Blood</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1>Blood Request Status</h1>
+            <p>Track your request status</p>
+        </div>
+
+        <form method="POST">
+            <label for="hospital_name">Enter Hospital Name:</label>
+            <input type="text" id="hospital_name" name="hospital_name" required>
+            <br>
+            <button type="submit" class="btn">Check Status</button>
+        </form>
+
+        {% if requests %}
+            <h2>Request Status for Hospital: {{ requests[0].hospital_name }}</h2>
+            <table border="1" cellpadding="10">
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Blood Group</th>
+                    <th>Status</th>
+                </tr>
+                {% for req in requests %}
+                <tr>
+                    <td>{{ req.name }}</td>
+                    <td>{{ req.blood_group }}</td>
+                    <td>{{ req.status }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% elif requests is not none %}
+            <p>No requests found for this hospital.</p>
+        {% endif %}
+    </main>
+</body>
+</html>
