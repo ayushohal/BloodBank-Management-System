@@ -21,10 +21,14 @@ app.secret_key = 'secret'
 
 load_dotenv()
 
+db_user = os.getenv('DB_USER')
+db_password = os.getenv('DB_PASSWORD')
+db_host = os.getenv('DB_HOST')
+db_name = os.getenv('DB_NAME')
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-001:generateContent?key={GEMINI_API_KEY}"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://sql12779254:XJM6DJ5Qx6@sql12.freesqldatabase.com:3306/sql12779254'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{db_user}:{db_password}@{db_host}:3306/{db_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
