@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Hospital Login</title>
@@ -61,7 +62,7 @@
 
         .main-container {
             max-width: 600px;
-            margin: 6rem auto; 
+            margin: 6rem auto;
             padding: 2rem;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
@@ -85,7 +86,8 @@
             color: #343a40;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"],
+        input[type="password"] {
             width: 100%;
             padding: 0.75rem;
             margin-top: 0.5rem;
@@ -143,14 +145,27 @@
         <h2>Hospital Staff Login</h2>
 
         {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="alert">
-                    {% for message in messages %}
-                        <p>{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
+        {% if messages %}
+        <div class="alert">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% endwith %}
+
+        <div class="demo-credentials" style="
+    background-color: #f8d7da; 
+    color: #721c24; 
+    padding: 10px; 
+    border-radius: 5px; 
+    margin-bottom: 15px; 
+    text-align: center;
+">
+            <strong>Demo Login:</strong> <br>
+            Username: <span style="font-weight:bold;">anish</span> <br>
+            Password: <span style="font-weight:bold;">password2</span>
+        </div>
 
         <form method="POST">
             <div class="form-group">
@@ -165,11 +180,12 @@
 
             <div class="form-group">
                 <label for="hospital_name">Name of Hospital:</label>
-                <input type="text" id="hospital_name" name="hospital_name" required>
+                <input type="text" id="hospital_name" name="hospital_name" value="ruby hospital" readonly required>
             </div>
 
             <input type="submit" value="Login">
         </form>
     </main>
 </body>
+
 </html>

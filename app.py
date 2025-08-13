@@ -11,6 +11,7 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 import os
 import requests
 from dotenv import load_dotenv
+from urllib.parse import quote_plus
 
 app = Flask(__name__)
 
@@ -22,7 +23,7 @@ app.secret_key = 'secret'
 load_dotenv()
 
 db_user = os.getenv('DB_USER')
-db_password = os.getenv('DB_PASSWORD')
+db_password = quote_plus(os.getenv('DB_PASSWORD'))
 db_host = os.getenv('DB_HOST')
 db_name = os.getenv('DB_NAME')
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
